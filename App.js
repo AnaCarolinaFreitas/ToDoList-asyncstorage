@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TextInput, Button, StyleSheet, FlatList, StatusBar } from "react-native";
+import { View, Text, TextInput, Button styles={styles.button}, StyleSheet, FlatList, StatusBar } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFonts } from 'expo-font';
 
@@ -74,8 +74,8 @@ export default function App() {
         value={task}
         onChangeText={setTask}
       />
-  <Button title="Salvar Tarefa" onPress={saveTask} />
-  <Button title="Remover Todas as Tarefas" onPress={deleteAllTasks} />
+  <Button styles={styles.button} title="Salvar Tarefa" onPress={saveTask} />
+  <Button styles={styles.button} title="Remover Todas as Tarefas" onPress={deleteAllTasks} />
 
       <FlatList
         data={savedTask}
@@ -83,7 +83,7 @@ export default function App() {
         renderItem={({ item }) => (
           <View style={styles.taskContainer}>
             <Text style={styles.taskText}>{item.value}</Text>
-            <Button title="Remover" onPress={() => deleteTask(item.id)} />
+            <Button styles={styles.button} title="Remover" onPress={() => deleteTask(item.id)} />
           </View>
         )}
         ListEmptyComponent={<Text style={{ marginTop: 20 }}>Nenhuma tarefa.</Text>}
@@ -100,11 +100,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   titulo: {
-    fontSize: 24,
+    fontSize: 37,
+    fontStyle: "italic",
     fontWeight: "bold",
     marginBottom: 20,
     marginTop: 40,
-    fontFamily: "Oswald",
+    flexWrap: "wrap",
   },
   input: {
     borderWidth: 1,
@@ -114,14 +115,22 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   taskContainer: {
+    flexWrap: "wrap",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#eee",
+    backgroundColor: "#e0c7fdff",
+    borderRadius: 15,
+    marginBottom: 10,
   },
   taskText: {
     fontSize: 18,
+  },
+  button: {
+    backgroundColor: "#6a5acd",
+    borderRadius: 5,
+    padding: 10,
+    marginVertical: 5,
   },
 });
