@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TextInput, Button styles={styles.button}, StyleSheet, FlatList, StatusBar } from "react-native";
+import { View, Text, TextInput, Button, StyleSheet, FlatList, StatusBar } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFonts } from 'expo-font';
 
@@ -74,8 +74,12 @@ export default function App() {
         value={task}
         onChangeText={setTask}
       />
-  <Button styles={styles.button} title="Salvar Tarefa" onPress={saveTask} />
-  <Button styles={styles.button} title="Remover Todas as Tarefas" onPress={deleteAllTasks} />
+      <View style={styles.buttonsdiv}>
+          <Button color="#6a5acd" title="Salvar Tarefa" onPress={saveTask} />
+       
+          <Button color="#6f22b2ff" title="Remover Todas as Tarefas" onPress={deleteAllTasks} />
+        
+      </View>
 
       <FlatList
         data={savedTask}
@@ -83,7 +87,9 @@ export default function App() {
         renderItem={({ item }) => (
           <View style={styles.taskContainer}>
             <Text style={styles.taskText}>{item.value}</Text>
-            <Button styles={styles.button} title="Remover" onPress={() => deleteTask(item.id)} />
+            <View style={{ borderRadius: 50, overflow: 'hidden' }}>
+              <Button color="#6f22b2ff" title="Remover" onPress={() => deleteTask(item.id)} />
+            </View>
           </View>
         )}
         ListEmptyComponent={<Text style={{ marginTop: 20 }}>Nenhuma tarefa.</Text>}
@@ -97,7 +103,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: "#fff",
+    backgroundColor: "#ffffffff",
   },
   titulo: {
     fontSize: 37,
@@ -109,7 +115,7 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: "#8b03cfff",
     borderRadius: 5,
     padding: 10,
     marginBottom: 20,
@@ -123,14 +129,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#e0c7fdff",
     borderRadius: 15,
     marginBottom: 10,
+    marginTop: 10,
   },
   taskText: {
     fontSize: 18,
   },
   button: {
-    backgroundColor: "#6a5acd",
-    borderRadius: 5,
-    padding: 10,
-    marginVertical: 5,
+    borderRadius: 50,
   },
+  buttonsdiv:{
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+ 
 });
